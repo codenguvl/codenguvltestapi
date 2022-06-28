@@ -13,6 +13,10 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => console.log("connect result"))
   .catch((err) => console.log(err));
-app.listen(port, () => {
-  console.log("server listen port", port);
+app.listen(process.env.PORT || 3000, function () {
+  console.log(
+    "Express server listening on port %d in %s mode",
+    this.address().port,
+    app.settings.env
+  );
 });
