@@ -1,5 +1,7 @@
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
+const cors = require("cors");
 require("dotenv").config();
 const port = process.env.PORT || 3000;
 const userRoutes = require("./routes/user");
@@ -7,9 +9,12 @@ const mongoose = require("mongoose");
 app.use(express.json());
 app.use("/api", userRoutes);
 app.get("/", (req, res) => {
-  res.send("cái lồn má");
+  res.send("Test API");
 });
-app.use((req, res, next) => {
+app.use(cors());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+/* app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   res.header(
     "Access-Control-Allow-Headers",
@@ -20,10 +25,11 @@ app.use((req, res, next) => {
     return res.status(200).json({});
   }
   next();
-});
+}); */
 mongoose
   .connect(
-    "mongodb+srv://codenguvl:codenguvl@cluster0.ngmugqj.mongodb.net/?retryWrites=true&w=majority"
+    "mongodb+srv://codenguvl:codenguvl@cluster0.ngmugqj.mongodb.net/?retryWrites=true&w=majority",
+    { useNewUrlParser: true }
   )
   /* .connect(process.env.MONGODB_URI) */
   .then(() => console.log("connect result"))
