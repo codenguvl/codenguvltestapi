@@ -5,6 +5,14 @@ require("dotenv").config();
 const userRoutes = require("./routes/user");
 const mongoose = require("mongoose");
 app.use(express.json());
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
 app.use("/api", userRoutes);
 app.get("/", (req, res) => {
   res.send("Test API");
@@ -14,15 +22,6 @@ app.use(
     origin: "*",
   })
 );
-app.options("*", cors());
-//
-app.all("*", function (req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-//
 mongoose
   .connect(
     "mongodb+srv://codenguvl:codenguvl@cluster0.ngmugqj.mongodb.net/?retryWrites=true&w=majority"
