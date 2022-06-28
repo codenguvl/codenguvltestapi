@@ -13,7 +13,7 @@ app.get("/", (req, res) => {
 });
 app.use(
   cors({
-    origin: "*",
+    origin: "http://127.0.0.1:5500",
   })
 );
 /* app.use(bodyParser.urlencoded({ extended: false }));
