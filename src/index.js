@@ -1,9 +1,7 @@
 const express = require("express");
 const app = express();
-/* const bodyParser = require("body-parser"); */
 const cors = require("cors");
 require("dotenv").config();
-const port = process.env.PORT || 3000;
 const userRoutes = require("./routes/user");
 const mongoose = require("mongoose");
 app.use(express.json());
@@ -13,15 +11,12 @@ app.get("/", (req, res) => {
 });
 app.use(
   cors({
-    origin: "http://127.0.0.1:5500",
+    origin: "*",
   })
 );
-/* app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json()); */
 mongoose
   .connect(
-    "mongodb+srv://codenguvl:codenguvl@cluster0.ngmugqj.mongodb.net/?retryWrites=true&w=majority",
-    { useNewUrlParser: true }
+    "mongodb+srv://codenguvl:codenguvl@cluster0.ngmugqj.mongodb.net/?retryWrites=true&w=majority"
   )
   /* .connect(process.env.MONGODB_URI) */
   .then(() => console.log("connect result"))
