@@ -10,7 +10,7 @@ app.get("/", (req, res) => {
   res.send("cái lồn má");
 });
 mongoose
-  .connect(process.env.MONGODB_URI.toString())
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log("connect result"))
   .catch((err) => console.log(err));
 app.listen(process.env.PORT || 3000, function () {
